@@ -1,0 +1,27 @@
+//Carga aleatoriamente las minas
+function loadMines2()
+{
+	for ( var i = 1; i <= cantBrickH; i++ ) 
+	{
+		for ( var j = 1; j <= cantBrickV; j++)
+		{
+			if(availableMines !=0){
+				//Si el valor aleatorio es mayor a 8, pone una mina en esa posicion
+				if((1 + Math.floor(Math.random() * 10)) > 8)
+				{
+					tempMinePos = i.toString()+'-'+j.toString();
+					//Controla que la posicion de la mina no sea elegida dos veces
+					if(($.inArray(tempMinePos,minesArray)) == -1){
+						availableMines -= 1;
+						minesArray.push(tempMinePos);
+					}
+				}
+			}
+		}
+	}
+	//Si no se alcanzaron a cargar todas las minas, se vuelve a llamar la funcion
+	if(minesArray.length <99)
+	{			
+		loadMines();
+	}
+}

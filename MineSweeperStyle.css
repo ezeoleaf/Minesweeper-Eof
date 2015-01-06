@@ -1,0 +1,119 @@
+.brick
+{ 
+	position: absolute;
+	height:20px; 
+	width:20px; 
+	background-color:#CCC; 
+	border: solid #999 2px;
+	text-align: center;
+}
+
+.light
+{ 
+	height:3px; 
+	width:20px; 
+	background-color:#D9D9D9; 
+	/*opacity:0.2;*/
+}
+
+.lightOff
+{ 
+	height:3px; 
+	width:20px; 
+	background-color:#b3b3b3; 
+	/*opacity:0.2;*/
+}
+
+#court
+{
+	position: absolute;
+	left: 100px;
+	top: 100px;
+	width: 720px;
+	height: 384px;
+	background: #000000;
+	border: solid 1px black;
+}
+
+#cantOfNumbers
+{
+	position: absolute;
+	left: 100px;
+	top: 485px;
+	width: 720px;
+	height: 50px;
+	background: #cccccc;
+	border: solid 1px black;
+}
+
+#headCourt
+{
+	position: absolute;
+	left: 100px;
+	top: 50px;
+	width: 720px;
+	height: 50px;
+	background: #cccccc;
+	border: solid 1px black;
+}
+
+#mines
+{
+	border: solid 1px black;
+	position: absolute;
+	left: 150px;
+	top: 15px;
+	background: black;
+	width: 50px;
+	height: 20px;
+	color: red;
+	text-align: right;
+}
+
+#minesText
+{
+	font-family: timeFont;
+	font-size: 20px;
+}
+
+#reset
+{
+	position: absolute;
+	left: 320px;
+	top: 14px;	
+	width: 50px;
+	height: 20px;		
+}
+
+#time
+{
+	border: solid 1px black;
+	position: absolute;
+	left: 550px;
+	top: 15px;
+	background: black;
+	width: 50px;
+	height: 20px;
+	color: red;
+	text-align: right;
+}
+
+@font-face {
+    font-family: timeFont;
+    src: url(Fonts/ds-digib.ttf);
+    font-weight: normal;
+}
+
+#timeText
+{
+	font-family: timeFont;
+	font-size: 20px;
+}
+
+#testClick
+{
+	position: absolute;
+	left: 0px;
+	height: 0px;
+	color: red;
+}
