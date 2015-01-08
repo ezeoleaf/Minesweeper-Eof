@@ -56,6 +56,16 @@
 	background: #cccccc;
 	border: solid 1px black;
 }
+#levels
+{
+	position: absolute;
+	left: 100px;
+	top: 0px;
+	width: 720px;
+	height: 50px;
+	background: #cccccc;
+	border: solid 1px black;
+}
 
 #mines
 {
@@ -68,6 +78,32 @@
 	height: 20px;
 	color: red;
 	text-align: right;
+}
+
+#levelContainers
+{
+	position: absolute;
+	top: 15px;
+	width: 720px;
+}
+
+#easyLevel
+{
+	position: absolute;
+	left: 150px;
+	width: 50px;
+}
+
+#mediumLevel
+{
+	position: absolute;
+	left: 350px;
+}
+
+#hardLevel
+{
+	position: absolute;
+	left: 550px;
 }
 
 #minesText
