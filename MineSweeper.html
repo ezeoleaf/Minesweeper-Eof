@@ -607,11 +607,11 @@ function showColor(cantOfMines)
 //Devuelve true si se mantiene dentro del recuadro
 function zeroControlOrTop(pos_i, pos_j)
 {
-	if(pos_i < 1 || pos_i > 16)
+	if(pos_i < 1 || pos_i > cantBrickH)
 	{
 		return false;
 	}
-	if(pos_j < 1 || pos_j > 30)
+	if(pos_j < 1 || pos_j > cantBrickV)
 	{
 		return false;
 	}
@@ -623,8 +623,8 @@ function loadMines(posNoMine_i,posNoMine_j)
 {
 	do
 	{
-		randomPos_i = (1 + Math.floor(Math.random() * 16));
-		randomPos_j = (1 + Math.floor(Math.random() * 30));
+		randomPos_i = (1 + Math.floor(Math.random() * cantBrickH));
+		randomPos_j = (1 + Math.floor(Math.random() * cantBrickV));
 		
 		//Control para que cuando se hace un click, que siempre se cree un espacio vacio		
 		if(aroundControl(randomPos_i,randomPos_j, posNoMine_i, posNoMine_j) == 0){		
@@ -687,12 +687,11 @@ function aroundControl(randomPos_i,randomPos_j, posNoMine_i, posNoMine_j)
 function loadBrick()
 {
 	var especificBrick;
-	
+	initialPos = posBrick_x;
 	for ( var i = 1; i <= cantBrickH; i++ ) 
 	{
 		for ( var j = 1; j <= cantBrickV; j++)
 		{
-			//backgroundColor = getBackground(1 + Math.floor(Math.random() * 7)); //Descomentar este y comentar el de arriba para que cada brick sea de un color distinto sin importar el renglon
 			if(j == 1 && i == 1)
 			{
 				especificBrick = '<div class="brick" id="brick'+(i.toString())+'-'+(j.toString())+'" style="left: '+posBrick_x+'px; top: '+posBrick_y+'px;visibility: visible;" onmouseup="brickClick('+i+','+j+')"><div class="light"></div></div>';
@@ -703,7 +702,7 @@ function loadBrick()
 			}
 			posBrick_x += 24;
 		}
-		posBrick_x = 0;
+		posBrick_x = initialPos;
 		posBrick_y += 24;
 	}
 	$('#court').html(especificBrick);
@@ -744,7 +743,38 @@ function winGame()
 }
 
 //Empieza el juego, inicializando todo
-function newGame(){
+function newGame(dificulty){
+	switch(dificulty)
+	{
+		case 1:
+			posBrick_x = 250;
+			posBrick_y = 0;
+			mines = 10;
+			availableMines = 9;
+			//H - horizontal //V - vertical
+			cantBrickV = 9;
+			cantBrickH = 9;
+			break;
+		case 2:
+			posBrick_x = 160;
+			posBrick_y = 0;
+			mines = 40;
+			availableMines = 39;
+			//H - horizontal //V - vertical
+			cantBrickV = 16;
+			cantBrickH = 16;
+			break;
+		case 3:
+			posBrick_x = 0;
+			posBrick_y = 0;
+			mines = 100;
+			availableMines = 99;
+			//H - horizontal //V - vertical
+			cantBrickV = 30;
+			cantBrickH = 16;
+			break;
+	}
+	/*
 	posBrick_x = 0;
 	posBrick_y = 0;
 	mines = 100;
@@ -752,6 +782,7 @@ function newGame(){
 	//H - horizontal //V - vertical
 	cantBrickV = 30;
 	cantBrickH = 16;
+	*/
 	time = 0;	
 	lose = 0;
 	win = 0;
@@ -771,9 +802,9 @@ function newGame(){
 	minesClicked.length=0;
 	flagAdded.length=0;
 	
-	playedGames += 1;
+	playedGames++;
 
-	if(playedGames == 7)
+	if(playedGames == 10)
 	{
 		 location.reload();
 	}
@@ -786,9 +817,18 @@ function newGame(){
 	$('#minesText').html(mines);
 	$('#buttonReset').val('On Game');
 	$('#buttonReset').click(function(){
-		newGame();
+		newGame(dificulty);
 	});
-
+	
+	$('#btnEasyLevel').click(function (){
+		newGame(1);
+	});
+	$('#btnMediumLevel').click(function (){
+		newGame(2);
+	});
+	$('#btnHardLevel').click(function (){
+		newGame(3);
+	});
 }
 
 //Bloquea el menu contextual del click derecho
@@ -800,11 +840,12 @@ if (window.sidebar){
 	document.onmousedown=disableselect;
 }
 
+playedGames = 0;
+
 $(document).ready(function(){
 	
-	playedGames = 0;
 	//Inicia los valores cuando se carga la pagina
-	newGame();
+	newGame(3);
 	
 	//Inicia los timers, uno se encarga de imprimir el tiempo en segundos y el segundo de actualizar la cantidad de minas
 	var timer = $.timer(function (){
@@ -825,6 +866,7 @@ $(document).ready(function(){
 			$('#textOfNumbers').html('');
 		}
 	},20,true);
+	
 });
 </script>
 <body>
